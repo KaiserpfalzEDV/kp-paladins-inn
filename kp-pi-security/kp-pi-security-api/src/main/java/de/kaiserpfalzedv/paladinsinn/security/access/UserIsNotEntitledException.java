@@ -14,29 +14,23 @@
  * limitations under the License.
  */
 
-package de.kaiserpfalzedv.paladinsinn.security.tenant.impl;
+package de.kaiserpfalzedv.paladinsinn.security.access;
 
-import de.kaiserpfalzedv.paladinsinn.commons.impl.IdentifiableAbstractImpl;
+import java.security.Principal;
+
 import de.kaiserpfalzedv.paladinsinn.security.access.model.User;
-import de.kaiserpfalzedv.paladinsinn.security.access.model.impl.NullUser;
-import de.kaiserpfalzedv.paladinsinn.security.tenant.model.Tenant;
 
 /**
- * @author rlichti {@literal <rlichti@kaiserpfalz-edv.de>}
- * @since 2016-03-24
+ * @author klenkes {@literal <rlichti@kaiserpfalz-edv.de>}
+ * @version 1.0.0
+ * @since 2017-03-17
  */
-public class NullTenant extends IdentifiableAbstractImpl implements Tenant {
-    public NullTenant() {
-        super(Tenant.DEFAULT_TENANT, "");
+public class UserIsNotEntitledException extends SecurityException {
+    public UserIsNotEntitledException(String message) {
+        super(message);
     }
 
-    @Override
-    public User getMaintainer() {
-        return new NullUser();
-    }
-
-    @Override
-    public String getName() {
-        return "no tenant";
+    public UserIsNotEntitledException(final User user, final Principal entitlement) {
+        super(String.format("User %s is not entitled for %s", user, entitlement));
     }
 }

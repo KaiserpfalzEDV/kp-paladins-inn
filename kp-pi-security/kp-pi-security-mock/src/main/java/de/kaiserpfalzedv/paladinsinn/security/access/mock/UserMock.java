@@ -35,8 +35,8 @@ import de.kaiserpfalzedv.paladinsinn.security.access.model.impl.UserBuilder;
 import de.kaiserpfalzedv.paladinsinn.security.access.services.LoginService;
 import de.kaiserpfalzedv.paladinsinn.security.access.services.UserIdGenerator;
 import de.kaiserpfalzedv.paladinsinn.security.access.services.UserLoaderService;
-import de.kaiserpfalzedv.paladinsinn.security.tenant.impl.NullTenant;
 import de.kaiserpfalzedv.paladinsinn.security.tenant.model.Tenant;
+import de.kaiserpfalzedv.paladinsinn.security.tenant.model.impl.NullTenant;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -48,8 +48,8 @@ import org.slf4j.LoggerFactory;
  * @since 2017-03-14
  */
 @MockService
-public class UserServiceMock implements LoginService, UserLoaderService, UserIdGenerator {
-    private static final Logger LOG = LoggerFactory.getLogger(UserServiceMock.class);
+public class UserMock implements LoginService, UserLoaderService, UserIdGenerator {
+    private static final Logger LOG = LoggerFactory.getLogger(UserMock.class);
 
     private static final HashMap<Tenant, HashMap<String, User>> tenantUsers = new HashMap<>();
     private static final HashMap<String, User> users = new HashMap<>();
@@ -132,20 +132,20 @@ public class UserServiceMock implements LoginService, UserLoaderService, UserIdG
         HashMap<String, User> newTenantUsers = new HashMap<>(users.size());
 
         users.forEach(u -> {
-            if (UserServiceMock.users.containsKey(u.getName())) {
+            if (UserMock.users.containsKey(u.getName())) {
                 throw new IllegalArgumentException("The user id '" + u.getName()
                                                            + "' is assigned multiple times. Please check!");
             }
 
-            UserServiceMock.users.put(u.getName(), u);
+            UserMock.users.put(u.getName(), u);
             newTenantUsers.put(u.getName(), u);
         });
 
-        if (UserServiceMock.tenantUsers.containsKey(tenant)) {
-            UserServiceMock.tenantUsers.get(tenant).clear();
-            UserServiceMock.tenantUsers.get(tenant).putAll(newTenantUsers);
+        if (UserMock.tenantUsers.containsKey(tenant)) {
+            UserMock.tenantUsers.get(tenant).clear();
+            UserMock.tenantUsers.get(tenant).putAll(newTenantUsers);
         } else {
-            UserServiceMock.tenantUsers.put(tenant, newTenantUsers);
+            UserMock.tenantUsers.put(tenant, newTenantUsers);
         }
 
         LOG.info("Loaded {} users for tenant {} into User Service MOCK.", users.size(), tenant);

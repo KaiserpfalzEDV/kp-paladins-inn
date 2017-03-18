@@ -14,51 +14,27 @@
  * limitations under the License.
  */
 
-package de.kaiserpfalzedv.paladinsinn.security.tenant;
+package de.kaiserpfalzedv.paladinsinn.security.tenant.model.impl;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import de.kaiserpfalzedv.paladinsinn.commons.impl.IdentifiableAbstractImpl;
+import de.kaiserpfalzedv.paladinsinn.security.tenant.model.Tenant;
 
 /**
  * @author rlichti {@literal <rlichti@kaiserpfalz-edv.de>}
- * @since 2016-03-20
+ * @since 2016-03-24
  */
-public class TenantImplTest {
-
-    @Test
-    public void testGetMaintainer() throws Exception {
-
+public class NullTenant extends IdentifiableAbstractImpl implements Tenant {
+    public NullTenant() {
+        super(Tenant.DEFAULT_TENANT, "");
     }
 
-    @Test
-    public void testSetName() throws Exception {
-
+    @Override
+    public String getName() {
+        return "no tenant";
     }
 
-    @Test
-    public void testGetName() throws Exception {
-
-    }
-
-    @Test
-    public void testSetIdentity() throws Exception {
-
-    }
-
-    @Test
-    public void testGetIdentifier() throws Exception {
-
-    }
-
-
-    @Before
-    public void setUp() throws Exception {
-
-    }
-
-    @After
-    public void tearDown() throws Exception {
-
+    @Override
+    public String getKey() {
+        return "NUL";
     }
 }

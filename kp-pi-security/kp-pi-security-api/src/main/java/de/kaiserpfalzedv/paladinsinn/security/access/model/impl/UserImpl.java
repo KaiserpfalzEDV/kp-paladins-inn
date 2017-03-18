@@ -16,14 +16,20 @@
 
 package de.kaiserpfalzedv.paladinsinn.security.access.model.impl;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 import de.kaiserpfalzedv.paladinsinn.commons.impl.IdentifiableAbstractImpl;
 import de.kaiserpfalzedv.paladinsinn.commons.person.Email;
 import de.kaiserpfalzedv.paladinsinn.security.access.PasswordFailureException;
 import de.kaiserpfalzedv.paladinsinn.security.access.UserIsLockedException;
+import de.kaiserpfalzedv.paladinsinn.security.access.model.Entitlement;
 import de.kaiserpfalzedv.paladinsinn.security.access.model.Persona;
+import de.kaiserpfalzedv.paladinsinn.security.access.model.Role;
 import de.kaiserpfalzedv.paladinsinn.security.access.model.User;
 
 /**
@@ -33,12 +39,10 @@ import de.kaiserpfalzedv.paladinsinn.security.access.model.User;
  */
 class UserImpl extends IdentifiableAbstractImpl implements User {
     private static final long serialVersionUID = 7375303558202040469L;
-    
+    private final HashSet<Role> roles = new HashSet<>();
     private Persona person;
     private Email emailAddress;
-
     private String password;
-
     private boolean locked = false;
 
 
@@ -48,7 +52,8 @@ class UserImpl extends IdentifiableAbstractImpl implements User {
             final Persona person,
             final Email emailAddress,
             final String password,
-            final boolean locked
+            final boolean locked,
+            final Collection<Role> roles
     ) {
         super(uniqueId, name);
         
@@ -56,6 +61,10 @@ class UserImpl extends IdentifiableAbstractImpl implements User {
         this.emailAddress = emailAddress;
         this.password = password;
         this.locked = locked;
+
+        if (roles != null) {
+            this.roles.addAll(roles);
+        }
     }
     
 
@@ -95,6 +104,43 @@ class UserImpl extends IdentifiableAbstractImpl implements User {
         return locked;
     }
 
+    @Override
+    public Set<Role> getRoles() {
+        HashSet<Role> result = new HashSet<>();
+
+
+        roles.forEach(r -> addRole(result, r));
+
+        return Collections.unmodifiableSet(result);
+    }
+
+    @Override
+    public boolean isInRole(Role role) {
+        return getRoles().contains(role);
+    }
+
+    @Override
+    public Set<Entitlement> getEntitlements() {
+        HashSet<Entitlement> result = new HashSet<>();
+
+        getRoles().forEach(r -> result.addAll(r.getEntitlements()));
+
+        return result;
+    }
+
+    @Override
+    public boolean isEntitled(Entitlement entitlement) {
+        return getEntitlements().contains(entitlement);
+    }
+
+    private void addRole(HashSet<Role> roles, Role role) {
+        if (roles.contains(role))
+            return;
+
+        roles.add(role);
+
+        role.getIncludedRoles().forEach(r -> addRole(roles, role));
+    }
 
     @Override
     public String toString() {
@@ -106,6 +152,12 @@ class UserImpl extends IdentifiableAbstractImpl implements User {
             result.append(", locked");
         }
 
+        if (roles.size() >= 1) {
+            result.append(", ").append(roles.size()).append(" roles");
+        }
+
         return result.append('}').toString();
     }
+
+
 }

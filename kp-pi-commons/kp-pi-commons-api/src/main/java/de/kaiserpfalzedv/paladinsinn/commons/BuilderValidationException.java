@@ -1,5 +1,5 @@
 /*
- * Copyright 2016 Kaiserpfalz EDV-Service, Roland T. Lichti
+ * Copyright 2017 Kaiserpfalz EDV-Service, Roland T. Lichti
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -29,21 +29,15 @@ import java.util.Set;
 public class BuilderValidationException extends PaladinsInnBaseException {
     private final HashSet<String> failures = new HashSet<>();
 
-    public BuilderValidationException(final String message) {
-        super(message);
-    }
 
-    public BuilderValidationException(final String message, final Set<String> failures) {
-        super(message);
+    public BuilderValidationException(final Class<?> clasz, final Set<String> failures) {
+        super("Can't build object of type: " + clasz.getCanonicalName());
 
         if (failures != null) {
             this.failures.addAll(failures);
         }
     }
 
-    public BuilderValidationException(final Set<String> failures) {
-        this("Object not built. " + failures.size() + " failure(s) occured.", failures);
-    }
 
     /**
      * @return unmodifiable set of failures as string messages.

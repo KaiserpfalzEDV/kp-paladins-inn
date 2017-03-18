@@ -14,23 +14,29 @@
  * limitations under the License.
  */
 
-package de.kaiserpfalzedv.paladinsinn.security.tenant.model;
+package de.kaiserpfalzedv.paladinsinn.security.access.services;
 
-import java.util.UUID;
+import java.util.Set;
 
-import de.kaiserpfalzedv.paladinsinn.commons.Identifiable;
+import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.paging.PageRequest;
+import de.kaiserpfalzedv.paladinsinn.security.access.model.User;
 
 /**
- * The tenant of a data node in the database.
- *
- * @author rlichti {@literal <rlichti@kaiserpfalz-edv.de>}
- * @since 2016-03-20
+ * @author klenkes {@literal <rlichti@kaiserpfalz-edv.de>}
+ * @version 1.0.0
+ * @since 2017-03-18
  */
-public interface Tenant extends Identifiable {
-    /**
-     * The default tenant id for non-multitenant systems.
-     */
-    UUID DEFAULT_TENANT = UUID.fromString("4dfb9268-7f29-4442-a458-f00e7e620f18");
+public interface UserService {
+    User create(User user);
 
-    String getKey();
+    Set<User> retrieve();
+
+    Page<User> retrieve(PageRequest pageRequest);
+
+    User retrieve(String userName);
+
+    User update(User user);
+
+    void delete(User user);
 }

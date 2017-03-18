@@ -14,22 +14,34 @@
  * limitations under the License.
  */
 
-package de.kaiserpfalzedv.paladinsinn.security.access.model;
+package de.kaiserpfalzedv.paladinsinn.security.access.services;
 
-import java.security.Principal;
 import java.util.Set;
+import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.Identifiable;
+import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.paging.PageRequest;
+import de.kaiserpfalzedv.paladinsinn.security.access.model.Entitlement;
 
 /**
  * @author klenkes {@literal <rlichti@kaiserpfalz-edv.de>}
  * @version 1.0.0
- * @since 2017-03-11
+ * @since 2017-03-17
  */
-public interface Role extends Identifiable {
-    boolean isInRole(Role role);
-    boolean isEntitled(Principal entitlement);
+public interface EntitlementService {
+    Entitlement create(Entitlement entitlement);
 
-    Set<? extends Role> getIncludedRoles();
-    Set<? extends Entitlement> getEntitlements();
+    Set<Entitlement> retrieve();
+
+    Page<Entitlement> retrieve(PageRequest pageRequest);
+
+    Entitlement retrieve(String entitlementName);
+
+    Entitlement update(Entitlement entitlement);
+
+    void delete(Entitlement entitlement);
+
+    void delete(UUID uniqueId);
+
+    void delete(String entitlementName);
 }

@@ -17,6 +17,7 @@
 package de.kaiserpfalzedv.paladinsinn.security.access.model;
 
 import java.util.Locale;
+import java.util.Set;
 import java.util.UUID;
 
 import de.kaiserpfalzedv.paladinsinn.commons.Identifiable;
@@ -61,4 +62,12 @@ public interface User extends Identifiable {
      * @return TRUE if the user currentl is locked.
      */
     boolean isLocked();
+
+    Set<Role> getRoles();
+
+    boolean isInRole(Role role);
+
+    Set<Entitlement> getEntitlements();
+
+    boolean isEntitled(Entitlement entitlement);
 }

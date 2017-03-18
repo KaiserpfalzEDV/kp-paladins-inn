@@ -14,12 +14,11 @@
  * limitations under the License.
  */
 
-package de.kaiserpfalzedv.paladinsinn.security.tenant.impl;
+package de.kaiserpfalzedv.paladinsinn.security.tenant.model.impl;
 
 import java.util.UUID;
 
 import de.kaiserpfalzedv.paladinsinn.commons.Identifiable;
-import de.kaiserpfalzedv.paladinsinn.security.access.model.User;
 import de.kaiserpfalzedv.paladinsinn.commons.impl.IdentifiableAbstractImpl;
 import de.kaiserpfalzedv.paladinsinn.security.tenant.model.Tenant;
 
@@ -28,16 +27,26 @@ import de.kaiserpfalzedv.paladinsinn.security.tenant.model.Tenant;
  * @since 2016-03-20
  */
 public class TenantImpl extends IdentifiableAbstractImpl implements Tenant, Identifiable {
-    private User maintainer;
+    private String key;
 
-    public TenantImpl(final UUID id, final String name, final User maintainer) {
-        super(id, name);
 
-        this.maintainer = maintainer;
+    TenantImpl(final UUID uniqueId, final String key, final String name) {
+        super(uniqueId, name);
+
+        this.key = key;
+    }
+
+
+    public String getKey() {
+        return key;
     }
 
     @Override
-    public User getMaintainer() {
-        return maintainer;
+    public String toString() {
+        return new StringBuilder("TenantImpl@").append(System.identityHashCode(this)).append("{")
+                                               .append(getUniqueId())
+                                               .append(", ").append(key)
+                                               .append(", ").append(getName())
+                                               .toString();
     }
 }

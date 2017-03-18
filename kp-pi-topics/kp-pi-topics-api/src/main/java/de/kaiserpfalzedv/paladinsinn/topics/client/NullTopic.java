@@ -21,7 +21,7 @@ import java.util.List;
 import java.util.UUID;
 
 import de.kaiserpfalzedv.paladinsinn.security.access.model.impl.NullUser;
-import de.kaiserpfalzedv.paladinsinn.security.tenant.impl.NullTenant;
+import de.kaiserpfalzedv.paladinsinn.security.tenant.model.impl.NullTenant;
 import de.kaiserpfalzedv.paladinsinn.topics.Topic;
 
 /**

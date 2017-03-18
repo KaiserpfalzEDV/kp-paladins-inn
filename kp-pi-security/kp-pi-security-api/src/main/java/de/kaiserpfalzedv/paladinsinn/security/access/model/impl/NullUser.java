@@ -27,12 +27,13 @@ import de.kaiserpfalzedv.paladinsinn.security.access.model.User;
 public class NullUser  extends UserImpl implements User {
     public NullUser() {
         super(
-            UUID.fromString("736eb2d8-dacf-48bd-879a-00bb83e969c7"),
-            "",
-            null,
-            null,
-            null,
-            true
+                UUID.fromString("736eb2d8-dacf-48bd-879a-00bb83e969c7"),
+                "no user",
+                null,
+                null,
+                null,
+                true,
+                null
         );
     }
 }

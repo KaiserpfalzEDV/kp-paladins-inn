@@ -19,12 +19,13 @@ package de.kaiserpfalzedv.paladinsinn.security.access.model.impl;
 import java.security.Principal;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 import java.util.UUID;
 
+import de.kaiserpfalzedv.paladinsinn.commons.impl.IdentifiableAbstractImpl;
 import de.kaiserpfalzedv.paladinsinn.security.access.model.Entitlement;
 import de.kaiserpfalzedv.paladinsinn.security.access.model.Role;
-import de.kaiserpfalzedv.paladinsinn.commons.impl.IdentifiableAbstractImpl;
 
 /**
  * @author klenkes {@literal <rlichti@kaiserpfalz-edv.de>}
@@ -50,6 +51,18 @@ public class RoleImpl extends IdentifiableAbstractImpl implements Role {
         this.roles.addAll(roles);
         this.directEntitlements.addAll(directEntitlements);
         this.entitlements.addAll(entitlements);
+    }
+
+
+    public boolean isInRole(Role role) {
+        boolean result = equals(role);
+
+        Iterator<Role> roleIterator = roles.iterator();
+        while (!result && roleIterator.hasNext()) {
+            result = roleIterator.next().isInRole(role);
+        }
+
+        return result;
     }
 
 

@@ -14,25 +14,32 @@
  * limitations under the License.
  */
 
-package de.kaiserpfalzedv.paladinsinn.security.access;
+package de.kaiserpfalzedv.paladinsinn.security.tenant;
 
-import de.kaiserpfalzedv.paladinsinn.commons.PaladinsInnBaseException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * @author klenkes {@literal <rlichti@kaiserpfalz-edv.de>}
  * @version 1.0.0
- * @since 2017-03-14
+ * @since 2017-03-18
  */
-public abstract class SecurityException extends PaladinsInnBaseException {
-    public SecurityException(String message) {
+public class TenantPersistenceException extends TenantException {
+    private static final Logger LOG = LoggerFactory.getLogger(TenantPersistenceException.class);
+
+    public TenantPersistenceException(String message) {
         super(message);
     }
 
-    public SecurityException(String message, Throwable cause) {
+    public TenantPersistenceException(String message, Throwable cause) {
         super(message, cause);
     }
 
-    public SecurityException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
+    public TenantPersistenceException(Throwable cause) {
+        super(cause);
+    }
+
+    public TenantPersistenceException(String message, Throwable cause, boolean enableSuppression, boolean writableStackTrace) {
         super(message, cause, enableSuppression, writableStackTrace);
     }
 }

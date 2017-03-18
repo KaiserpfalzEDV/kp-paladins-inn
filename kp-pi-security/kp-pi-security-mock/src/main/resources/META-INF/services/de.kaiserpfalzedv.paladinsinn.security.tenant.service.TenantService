@@ -30,4 +30,4 @@
 # limitations under the License.
 #
 
-de.kaiserpfalzedv.paladinsinn.security.access.mock.UserMock
+de.kaiserpfalzedv.paladinsinn.security.tenant.mock.TenantMock
