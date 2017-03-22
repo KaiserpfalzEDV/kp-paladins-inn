@@ -17,6 +17,6 @@
     <modules>
         <module>kp-pi-security-api</module>
         <module>kp-pi-security-service</module>
-        <module>kp-pi-security-mock</module>
+        <module>kp-pi-security-store-mock</module>
     </modules>
 </project>

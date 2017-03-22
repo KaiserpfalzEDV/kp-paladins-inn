@@ -21,10 +21,10 @@ import java.net.URL;
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-import de.kaiserpfalzedv.paladinsinn.commons.Identifiable;
-import de.kaiserpfalzedv.paladinsinn.security.Maintainable;
-import de.kaiserpfalzedv.paladinsinn.security.tenant.model.TenantHolding;
-import de.kaiserpfalzedv.paladinsinn.topics.Taggable;
+import de.kaiserpfalzedv.paladinsinn.commons.persistence.Identifiable;
+import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.Maintainable;
+import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.TenantHolding;
+import de.kaiserpfalzedv.paladinsinn.topics.model.Taggable;
 
 /**
  * The event data for the events in the database.

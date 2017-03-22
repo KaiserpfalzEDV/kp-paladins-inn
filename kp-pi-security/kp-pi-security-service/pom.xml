@@ -52,20 +52,36 @@
         </dependency>
 
         <dependency>
-            <groupId>org.brickred</groupId>
-            <artifactId>socialauth</artifactId>
-            <version>4.14</version>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.smb-tec.neo4j</groupId>
-            <artifactId>neo4j-community</artifactId>
+            <groupId>org.brickred</groupId>
+            <artifactId>socialauth</artifactId>
+            <version>4.14</version>
         </dependency>
 
 
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
+        </dependency>
+
+
+        <dependency>
+            <groupId>de.kaiserpfalz-edv.paladins-inn</groupId>
+            <artifactId>kp-pi-security-store-mock</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-jdk14</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>

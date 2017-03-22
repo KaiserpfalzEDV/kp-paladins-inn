@@ -19,7 +19,7 @@ package de.kaiserpfalzedv.paladinsinn.commons.impl;
 import java.util.ArrayList;
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.Identifiable;
+import de.kaiserpfalzedv.paladinsinn.commons.persistence.Identifiable;
 
 /**
  * @author klenkes {@literal <rlichti@kaiserpfalz-edv.de>}
@@ -27,11 +27,9 @@ import de.kaiserpfalzedv.paladinsinn.commons.Identifiable;
  * @since 2017-03-11
  */
 public abstract class IdentifiableAbstractBuilder<T extends Identifiable> {
+    protected final ArrayList<String> validationErrors = new ArrayList<>(5);
     protected UUID uniqueId;
     protected String name;
-
-
-    protected final ArrayList<String> validationErrors = new ArrayList<>(5);
 
     public abstract T build();
 

@@ -19,7 +19,7 @@ package de.kaiserpfalzedv.paladinsinn.commons.impl;
 import java.util.Objects;
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.Identifiable;
+import de.kaiserpfalzedv.paladinsinn.commons.persistence.Identifiable;
 
 /**
  * @author klenkes {@literal <rlichti@kaiserpfalz-edv.de>}
@@ -40,15 +40,14 @@ public abstract class IdentifiableAbstractImpl implements Identifiable {
     }
 
     @Override
-    public UUID getUniqueId() {
-        return uniqueId;
+    public int hashCode() {
+        return Objects.hash(getUniqueId());
     }
 
     @Override
-    public String getName() {
-        return name;
+    public UUID getUniqueId() {
+        return uniqueId;
     }
-
 
     @Override
     public boolean equals(Object o) {
@@ -58,17 +57,17 @@ public abstract class IdentifiableAbstractImpl implements Identifiable {
         return Objects.equals(getUniqueId(), that.getUniqueId());
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(getUniqueId());
-    }
-
-
+    @SuppressWarnings("StringBufferReplaceableByString")
     @Override
     public String toString() {
         return new StringBuilder()
                 .append(getClass().getSimpleName()).append('@').append(System.identityHashCode(this)).append('{')
                 .append(getUniqueId()).append(", ").append(getName())
                 .append('}').toString();
+    }
+
+    @Override
+    public String getName() {
+        return name;
     }
 }

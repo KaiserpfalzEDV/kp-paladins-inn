@@ -18,6 +18,8 @@ package de.kaiserpfalzedv.paladinsinn.commons;
 
 import java.util.UUID;
 
+import de.kaiserpfalzedv.paladinsinn.commons.persistence.Identifiable;
+
 /**
  * The base exception for all checked exceptions of the Paladin's Inn Topic Hub.
  *
