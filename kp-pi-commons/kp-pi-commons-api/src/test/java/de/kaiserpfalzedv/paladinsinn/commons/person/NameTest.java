@@ -18,7 +18,8 @@ package de.kaiserpfalzedv.paladinsinn.commons.person;
 
 import java.util.List;
 
-import de.kaiserpfalzedv.paladinsinn.commons.person.impl.NameBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.person.Name;
+import de.kaiserpfalzedv.paladinsinn.commons.api.person.NameBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

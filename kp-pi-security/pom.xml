@@ -11,12 +11,12 @@
     </parent>
 
     <artifactId>kp-pi-security</artifactId>
-    <name>KP Paladins Inn - Security</name>
+    <name>KP PI :: Security</name>
     <packaging>pom</packaging>
 
     <modules>
         <module>kp-pi-security-api</module>
-        <module>kp-pi-security-service</module>
+        <module>kp-pi-security-impl</module>
         <module>kp-pi-security-store-mock</module>
     </modules>
 </project>

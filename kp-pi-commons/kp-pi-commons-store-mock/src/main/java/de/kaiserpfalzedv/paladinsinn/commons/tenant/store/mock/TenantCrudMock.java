@@ -23,19 +23,21 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.BuilderValidationException;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.PageRequest;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.impl.PageBuilder;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.DuplicateUniqueIdException;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.DuplicateUniqueKeyException;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.DuplicateUniqueNameException;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.PersistenceRuntimeException;
-import de.kaiserpfalzedv.paladinsinn.commons.service.MockService;
-import de.kaiserpfalzedv.paladinsinn.commons.service.SingleTenant;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.Tenant;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.impl.TenantBuilder;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.store.TenantCrudService;
+import javax.enterprise.inject.Alternative;
+
+import de.kaiserpfalzedv.paladinsinn.commons.api.BuilderValidationException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageRequest;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.DuplicateUniqueIdException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.DuplicateUniqueKeyException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.DuplicateUniqueNameException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.PersistenceRuntimeException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.service.MockService;
+import de.kaiserpfalzedv.paladinsinn.commons.api.service.SingleTenant;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.Tenant;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.TenantBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.store.TenantCrudService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,6 +46,7 @@ import org.slf4j.LoggerFactory;
  * @version 1.0.0
  * @since 2017-03-18
  */
+@Alternative
 @SingleTenant
 @MockService
 public class TenantCrudMock implements TenantCrudService {
@@ -53,6 +56,10 @@ public class TenantCrudMock implements TenantCrudService {
     private final HashMap<String, Tenant> tenantsByKey = new HashMap<>();
     private final HashMap<String, Tenant> tenantsByName = new HashMap<>();
 
+    @Override
+    public Optional<Tenant> retrieve(final String tenantKey) {
+        return Optional.ofNullable(tenantsByKey.get(tenantKey));
+    }
 
     @Override
     public Tenant create(final Tenant tenant) throws DuplicateUniqueKeyException {
@@ -75,6 +82,15 @@ public class TenantCrudMock implements TenantCrudService {
 
         LOG.info("Saved tenant to persistence: {} -> {}", tenant, data);
         return data;
+    }
+
+    @Override
+    public void delete(final String tenantName) {
+        if (tenantsByName.containsKey(tenantName)) {
+            delete(tenantsByName.get(tenantName));
+        } else {
+            LOG.warn("Can't delete tenant since it did not exist in persistence: name={}", tenantName);
+        }
     }
 
     private void checkDuplicateTenantUniqueId(Tenant tenant) throws DuplicateUniqueIdException {
@@ -110,10 +126,6 @@ public class TenantCrudMock implements TenantCrudService {
         return Optional.ofNullable(tenantsByUniqueId.get(uniqueId));
     }
 
-    @Override
-    public Optional<Tenant> retrieve(final String tenantKey) {
-        return Optional.ofNullable(tenantsByKey.get(tenantKey));
-    }
 
     @Override
     public Set<Tenant> retrieve() {
@@ -166,12 +178,5 @@ public class TenantCrudMock implements TenantCrudService {
         }
     }
 
-    @Override
-    public void delete(final String tenantName) {
-        if (tenantsByName.containsKey(tenantName)) {
-            delete(tenantsByName.get(tenantName));
-        } else {
-            LOG.warn("Can't delete tenant since it did not exist in persistence: name={}", tenantName);
-        }
-    }
+
 }

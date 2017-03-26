@@ -16,18 +16,21 @@
 
 package de.kaiserpfalzedv.paladinsinn.security.store.mock;
 
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.impl.AbstractMultitenantCrudMock;
-import de.kaiserpfalzedv.paladinsinn.commons.service.MockService;
-import de.kaiserpfalzedv.paladinsinn.commons.service.MultiTenant;
-import de.kaiserpfalzedv.paladinsinn.security.model.User;
-import de.kaiserpfalzedv.paladinsinn.security.model.impl.UserBuilder;
-import de.kaiserpfalzedv.paladinsinn.security.store.UserMultitenantCrudService;
+import javax.enterprise.inject.Alternative;
+
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.AbstractMultitenantCrudMock;
+import de.kaiserpfalzedv.paladinsinn.commons.api.service.MockService;
+import de.kaiserpfalzedv.paladinsinn.commons.api.service.MultiTenant;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.User;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.UserBuilder;
+import de.kaiserpfalzedv.paladinsinn.security.api.store.UserMultitenantCrudService;
 
 /**
  * @author klenkes {@literal <rlichti@kaiserpfalz-edv.de>}
  * @version 1.0.0
  * @since 2017-03-19
  */
+@Alternative
 @MockService
 @MultiTenant
 public class UserMultitenantCrudMock extends AbstractMultitenantCrudMock<User> implements UserMultitenantCrudService {

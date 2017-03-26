@@ -18,9 +18,9 @@ package de.kaiserpfalzedv.paladinsinn.commons.tenant;
 
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.BuilderValidationException;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.Tenant;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.impl.TenantBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.BuilderValidationException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.Tenant;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.TenantBuilder;
 import org.junit.Before;
 import org.junit.Test;
 

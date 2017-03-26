@@ -16,6 +16,7 @@
 
 package de.kaiserpfalzedv.paladinsinn.commons.person;
 
+import de.kaiserpfalzedv.paladinsinn.commons.api.person.Email;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

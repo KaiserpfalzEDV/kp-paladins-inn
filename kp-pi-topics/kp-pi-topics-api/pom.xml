@@ -12,7 +12,7 @@
     <artifactId>kp-pi-topics-api</artifactId>
     <packaging>jar</packaging>
 
-    <name>KP Paladins Inn - Topics API</name>
+    <name>KP PI :: Topics :: API</name>
 
 
     <build>
@@ -33,6 +33,16 @@
                         </Import-Package>
                     </instructions>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

@@ -18,8 +18,8 @@ package de.kaiserpfalzedv.paladinsinn.topics.services;
 
 import java.util.List;
 
-import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.PageRequest;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageRequest;
 import de.kaiserpfalzedv.paladinsinn.topics.model.Topic;
 
 /**

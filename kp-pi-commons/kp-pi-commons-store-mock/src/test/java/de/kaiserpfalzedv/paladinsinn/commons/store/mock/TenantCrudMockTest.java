@@ -20,13 +20,13 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.BuilderValidationException;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.impl.PageRequestImpl;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.PersistenceException;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.Tenant;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.impl.TenantBuilder;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.store.TenantCrudService;
+import de.kaiserpfalzedv.paladinsinn.commons.api.BuilderValidationException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageRequestImpl;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.PersistenceException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.Tenant;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.TenantBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.store.TenantCrudService;
 import de.kaiserpfalzedv.paladinsinn.commons.tenant.store.mock.TenantCrudMock;
 import org.junit.Assert;
 import org.junit.Before;
@@ -165,14 +165,14 @@ public class TenantCrudMockTest {
     public void shouldRetrieveTenantWhenGivenAValidUniqueId() throws PersistenceException {
         service.create(TENANT_3);
 
-        Optional<Tenant> result = service.retrieve(TENANT_UNIQUE_ID_3);
+        Optional<? extends Tenant> result = service.retrieve(TENANT_UNIQUE_ID_3);
 
         assertTrue(result.isPresent());
     }
 
     @Test
     public void shouldRetrieveNoTenantWhenGivenAnInvalidUniqueId() {
-        Optional<Tenant> result = service.retrieve(UUID.randomUUID());
+        Optional<? extends Tenant> result = service.retrieve(UUID.randomUUID());
 
         assertFalse(result.isPresent());
     }
@@ -182,7 +182,7 @@ public class TenantCrudMockTest {
     public void shouldRetrieveTenantWhenGivenAValidKey() throws PersistenceException {
         service.create(TENANT_3);
 
-        Optional<Tenant> result = service.retrieve(TENANT_KEY_3);
+        Optional<? extends Tenant> result = service.retrieve(TENANT_KEY_3);
         if (!result.isPresent()) {
             Assert.fail("The result is empty. Should contain a tenant!");
         }
@@ -196,7 +196,7 @@ public class TenantCrudMockTest {
 
     @Test
     public void shouldRetrieveNoTenantWhenGivenAnName() {
-        Optional<Tenant> result = service.retrieve("non existing tenant name");
+        Optional<? extends Tenant> result = service.retrieve("non existing tenant name");
 
         assertFalse(result.isPresent());
     }
@@ -206,7 +206,7 @@ public class TenantCrudMockTest {
     public void shouldGetSetOf6TenantsWhen6TenantsWereSavedBefore() {
         generate6Tenants();
 
-        Set<Tenant> results = service.retrieve();
+        Set<? extends Tenant> results = service.retrieve();
 
         assertEquals("There should be 6 tenants!", 6, results.size());
     }
@@ -228,7 +228,7 @@ public class TenantCrudMockTest {
     public void shouldGetTheSecondPageWhenTryingToLoadIt() {
         generate6Tenants();
 
-        Page<Tenant> result = service.retrieve(new PageRequestImpl(2, 3));
+        Page<? extends Tenant> result = service.retrieve(new PageRequestImpl(2, 3));
 
         assertEquals("Should contain 3 elements", 3, result.getCurrentPageSize());
     }
@@ -237,7 +237,7 @@ public class TenantCrudMockTest {
     public void shouldUpdateDataWhenGivenWithChangedName() throws BuilderValidationException, PersistenceException {
         service.create(TENANT_1);
 
-        Optional<Tenant> data = service.retrieve(TENANT_UNIQUE_ID_1);
+        Optional<? extends Tenant> data = service.retrieve(TENANT_UNIQUE_ID_1);
         if (!data.isPresent()) {
             Assert.fail("The tenant data optional is empty! Should contain the tenant data!");
         }
@@ -258,7 +258,7 @@ public class TenantCrudMockTest {
 
         service.delete(TENANT_1);
 
-        Optional<Tenant> result = service.retrieve(TENANT_UNIQUE_ID_1);
+        Optional<? extends Tenant> result = service.retrieve(TENANT_UNIQUE_ID_1);
         assertFalse(result.isPresent());
     }
 
@@ -268,7 +268,7 @@ public class TenantCrudMockTest {
 
         service.delete(TENANT_UNIQUE_ID_1);
 
-        Optional<Tenant> result = service.retrieve(TENANT_UNIQUE_ID_1);
+        Optional<? extends Tenant> result = service.retrieve(TENANT_UNIQUE_ID_1);
         assertFalse(result.isPresent());
     }
 
@@ -278,7 +278,7 @@ public class TenantCrudMockTest {
 
         service.delete(TENANT_NAME_1);
 
-        Optional<Tenant> result = service.retrieve(TENANT_UNIQUE_ID_1);
+        Optional<? extends Tenant> result = service.retrieve(TENANT_UNIQUE_ID_1);
         assertFalse(result.isPresent());
     }
 

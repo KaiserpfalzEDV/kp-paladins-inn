@@ -16,7 +16,7 @@
 
 package de.kaiserpfalzedv.paladinsinn.topics.services;
 
-import de.kaiserpfalzedv.paladinsinn.commons.PaladinsInnBaseException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.PaladinsInnBaseException;
 
 /**
  * A failure occured while working on the {@link TopicQuery}. The failed query can be retrieved from the exception by
@@ -26,6 +26,8 @@ import de.kaiserpfalzedv.paladinsinn.commons.PaladinsInnBaseException;
  * @since 2016-03-20
  */
 public class TopicQueryException extends PaladinsInnBaseException {
+    private static final long serialVersionUID = 3469148739540197814L;
+
     private TopicQuery failedQuery;
 
     public TopicQueryException(final TopicQuery query, final String message) {

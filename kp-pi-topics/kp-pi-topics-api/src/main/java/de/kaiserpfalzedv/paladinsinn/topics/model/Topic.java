@@ -19,11 +19,11 @@ package de.kaiserpfalzedv.paladinsinn.topics.model;
 import java.io.Serializable;
 import java.util.List;
 
-import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.PageRequest;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.Identifiable;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.Maintainable;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.TenantHolding;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageRequest;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.Identifiable;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.Maintainable;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.TenantHolding;
 
 /**
  * A single topic.

@@ -11,12 +11,16 @@
     </parent>
 
     <artifactId>kp-pi-commons</artifactId>
-    <name>KP Paladins Inn - Commons</name>
+    <name>KP PI :: Commons</name>
     <packaging>pom</packaging>
 
     <modules>
         <module>kp-pi-commons-api</module>
-        <module>kp-pi-commons-service</module>
+        <module>kp-pi-commons-impl</module>
         <module>kp-pi-commons-store-mock</module>
+        <module>kp-pi-commons-store-jpa</module>
+        <module>kp-pi-commons-ejb</module>
+        <module>kp-pi-commons-server</module>
+        <module>kp-pi-commons-client</module>
     </modules>
 </project>

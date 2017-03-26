@@ -11,11 +11,11 @@
     </parent>
 
     <artifactId>kp-pi-shops</artifactId>
-    <name>KP Paladins Inn - Shops</name>
+    <name>KP PI :: Shops</name>
     <packaging>pom</packaging>
 
     <modules>
         <module>kp-pi-shops-api</module>
-        <module>kp-pi-shops-service</module>
+        <module>kp-pi-shops-impl</module>
     </modules>
 </project>

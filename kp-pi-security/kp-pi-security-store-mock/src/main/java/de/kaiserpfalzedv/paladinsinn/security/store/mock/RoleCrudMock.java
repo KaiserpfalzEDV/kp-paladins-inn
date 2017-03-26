@@ -16,16 +16,17 @@
 
 package de.kaiserpfalzedv.paladinsinn.security.store.mock;
 
+import javax.enterprise.inject.Alternative;
 import javax.inject.Inject;
 
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.impl.AbstractCrudMock;
-import de.kaiserpfalzedv.paladinsinn.commons.service.MockService;
-import de.kaiserpfalzedv.paladinsinn.commons.service.SingleTenant;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.Tenant;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.impl.DefaultTenant;
-import de.kaiserpfalzedv.paladinsinn.security.model.Role;
-import de.kaiserpfalzedv.paladinsinn.security.store.RoleCrudService;
-import de.kaiserpfalzedv.paladinsinn.security.store.RoleMultitenantCrudService;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.AbstractCrudMock;
+import de.kaiserpfalzedv.paladinsinn.commons.api.service.MockService;
+import de.kaiserpfalzedv.paladinsinn.commons.api.service.SingleTenant;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.DefaultTenant;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.Tenant;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.Role;
+import de.kaiserpfalzedv.paladinsinn.security.api.store.RoleCrudService;
+import de.kaiserpfalzedv.paladinsinn.security.api.store.RoleMultitenantCrudService;
 
 /**
  * The tenant-less version of the mock service uses the multi-tenant {@link UserMultitenantCrudMock} with the
@@ -35,6 +36,7 @@ import de.kaiserpfalzedv.paladinsinn.security.store.RoleMultitenantCrudService;
  * @version 1.0.0
  * @since 2017-03-19
  */
+@Alternative
 @MockService
 @SingleTenant
 public class RoleCrudMock extends AbstractCrudMock<Role> implements RoleCrudService {

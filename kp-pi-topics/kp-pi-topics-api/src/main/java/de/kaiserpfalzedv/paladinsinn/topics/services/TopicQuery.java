@@ -24,5 +24,5 @@ import java.io.Serializable;
  * @since 2016-03-20
  */
 public class TopicQuery implements Serializable {
-
+    private static final long serialVersionUID = -7546203106362269440L;
 }

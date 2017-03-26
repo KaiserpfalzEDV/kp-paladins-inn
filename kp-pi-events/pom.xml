@@ -11,11 +11,11 @@
     </parent>
 
     <artifactId>kp-pi-events</artifactId>
-    <name>KP Paladins Inn - Events</name>
+    <name>KP PI :: Events</name>
     <packaging>pom</packaging>
 
     <modules>
         <module>kp-pi-events-api</module>
-        <module>kp-pi-events-service</module>
+        <module>kp-pi-events-impl</module>
     </modules>
 </project>

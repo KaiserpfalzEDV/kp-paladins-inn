@@ -28,7 +28,7 @@
     <artifactId>kp-pi-security-store-mock</artifactId>
     <packaging>bundle</packaging>
 
-    <name>KP Paladins Inn - Security Store MOCK</name>
+    <name>KP PI :: Security :: Store :: MOCK</name>
     <description>
         kp-pi-security mock service for development of other services.
     </description>
@@ -55,6 +55,16 @@
                         </Import-Package>
                     </instructions>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-source-plugin</artifactId>
             </plugin>
         </plugins>
     </build>

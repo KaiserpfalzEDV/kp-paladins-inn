@@ -20,12 +20,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.BuilderValidationException;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.PageRequest;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.impl.PageBuilder;
-import de.kaiserpfalzedv.paladinsinn.security.model.User;
-import de.kaiserpfalzedv.paladinsinn.security.model.impl.UserBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.BuilderValidationException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageRequest;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.User;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.UserBuilder;
 import de.kaiserpfalzedv.paladinsinn.topics.model.Topic;
 import de.kaiserpfalzedv.paladinsinn.topics.model.impl.TopicBuilder;
 import org.junit.Test;
@@ -47,13 +47,10 @@ public class TopicClientTest {
             .build();
 
     private static final Topic PARENT_TOPIC = new Topic() {
+        private static final long serialVersionUID = 0L;
+
         private UUID tenant = UUID.randomUUID();
         private UUID uniqueId = UUID.randomUUID();
-
-        @Override
-        public String getName() {
-            return "NULL";
-        }
 
         @Override
         public Topic getParent() {
@@ -84,6 +81,11 @@ public class TopicClientTest {
         @Override
         public UUID getUniqueId() {
             return uniqueId;
+        }
+
+        @Override
+        public String getName() {
+            return "NULL";
         }
 
         @Override

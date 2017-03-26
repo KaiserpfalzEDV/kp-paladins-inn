@@ -21,10 +21,10 @@ import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.BuilderValidationException;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.PageRequest;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.impl.PageBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.BuilderValidationException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageRequest;
 import de.kaiserpfalzedv.paladinsinn.topics.model.Topic;
 
 /**
@@ -34,6 +34,8 @@ import de.kaiserpfalzedv.paladinsinn.topics.model.Topic;
  * @since 2016-03-20
  */
 public class TopicImpl implements Topic {
+    private static final long serialVersionUID = -6934794520130256051L;
+    
     private final ArrayList<Topic> children = new ArrayList<>();
     private UUID tenant;
     private UUID maintainer;

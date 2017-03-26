@@ -11,11 +11,11 @@
     </parent>
 
     <artifactId>kp-pi-peers</artifactId>
-    <name>KP Paladins Inn - Peers</name>
+    <name>KP PI :: Peers</name>
     <packaging>pom</packaging>
 
     <modules>
         <module>kp-pi-peers-api</module>
-        <module>kp-pi-peers-service</module>
+        <module>kp-pi-peers-impl</module>
     </modules>
 </project>

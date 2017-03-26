@@ -20,20 +20,19 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.paging.Page;
-import de.kaiserpfalzedv.paladinsinn.commons.paging.impl.PageRequestImpl;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.DuplicateEntityException;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.DuplicateUniqueIdException;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.DuplicateUniqueKeyException;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.DuplicateUniqueNameException;
-import de.kaiserpfalzedv.paladinsinn.commons.persistence.PersistenceException;
-import de.kaiserpfalzedv.paladinsinn.commons.person.Email;
-import de.kaiserpfalzedv.paladinsinn.commons.person.impl.NameBuilder;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.impl.DefaultTenant;
-import de.kaiserpfalzedv.paladinsinn.security.model.User;
-import de.kaiserpfalzedv.paladinsinn.security.model.impl.PersonaBuilder;
-import de.kaiserpfalzedv.paladinsinn.security.model.impl.UserBuilder;
-import de.kaiserpfalzedv.paladinsinn.security.store.UserCrudService;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.Page;
+import de.kaiserpfalzedv.paladinsinn.commons.api.paging.PageRequestImpl;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.DuplicateEntityException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.DuplicateUniqueIdException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.DuplicateUniqueNameException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.persistence.PersistenceException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.person.Email;
+import de.kaiserpfalzedv.paladinsinn.commons.api.person.NameBuilder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.DefaultTenant;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.PersonaBuilder;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.User;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.UserBuilder;
+import de.kaiserpfalzedv.paladinsinn.security.api.store.UserCrudService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -113,7 +112,7 @@ public class UserCrudMockTest {
         User user = createDefaultUser();
         service.create(user);
 
-        Optional<User> result = service.retrieve(user.getUniqueId());
+        Optional<? extends User> result = service.retrieve(user.getUniqueId());
 
         assertTrue("The result should not be empty", result.isPresent());
     }
@@ -123,7 +122,7 @@ public class UserCrudMockTest {
         User user = createDefaultUser();
         service.create(user);
 
-        Optional<User> result = service.retrieve(UUID.randomUUID());
+        Optional<? extends User> result = service.retrieve(UUID.randomUUID());
 
         assertFalse("The result should be empty", result.isPresent());
     }
@@ -133,33 +132,33 @@ public class UserCrudMockTest {
         User user = createDefaultUser();
         service.create(user);
 
-        Optional<User> result = service.retrieve(user.getName());
+        Optional<? extends User> result = service.retrieve(user.getName());
 
         assertTrue("The result should not be empty", result.isPresent());
     }
 
     @Test
-    public void shouldRetrieveNoDataWhenKnowUserIdIsGiven() throws DuplicateUniqueKeyException {
+    public void shouldRetrieveNoDataWhenKnowUserIdIsGiven() throws DuplicateEntityException {
         User user = createDefaultUser();
         service.create(user);
 
-        Optional<User> result = service.retrieve("some idiotic string that should never be an user name");
+        Optional<? extends User> result = service.retrieve("some idiotic string that should never be an user name");
 
         assertFalse("The result should be empty", result.isPresent());
     }
 
     @Test
-    public void shouldRetrievePage2WhenRequestingIt() throws DuplicateUniqueKeyException {
+    public void shouldRetrievePage2WhenRequestingIt() throws DuplicateEntityException {
         createUsers(10);
 
-        Page<User> result = service.retrieve(new PageRequestImpl(2, 4));
+        Page<? extends User> result = service.retrieve(new PageRequestImpl(2, 4));
 
         assertEquals("The page number is not correct!", 2, result.getCurrentPageNumber());
         assertEquals("The page size is not correct!", 4, result.getCurrentPageSize());
         assertEquals("The data element size differ!", 4, result.getData().size());
     }
 
-    private void createUsers(@SuppressWarnings("SameParameterValue") int number) throws DuplicateUniqueKeyException {
+    private void createUsers(@SuppressWarnings("SameParameterValue") int number) throws DuplicateEntityException {
         for (int i = 1; i <= number; i++) {
             service.create(createAnUser(i));
         }
@@ -176,7 +175,7 @@ public class UserCrudMockTest {
         user = new UserBuilder().withUser(user).withEmailAddress(emailAddress).build();
         service.update(user);
 
-        Optional<User> wrappedResult = service.retrieve(id);
+        Optional<? extends User> wrappedResult = service.retrieve(id);
 
         if (wrappedResult.isPresent()) {
             User result = wrappedResult.get();
@@ -197,40 +196,40 @@ public class UserCrudMockTest {
 
         service.update(user);
 
-        Optional<User> result = service.retrieve(id);
+        Optional<? extends User> result = service.retrieve(id);
 
         assertTrue(result.isPresent());
     }
 
     @Test
-    public void shouldDeleteUserWhenUserIsMatching() throws DuplicateUniqueKeyException {
+    public void shouldDeleteUserWhenUserIsMatching() throws DuplicateEntityException {
         User user = createAnUser(0);
         service.create(user);
 
         service.delete(user);
-        Optional<User> result = service.retrieve(user.getUniqueId());
+        Optional<? extends User> result = service.retrieve(user.getUniqueId());
 
         assertFalse(result.isPresent());
     }
 
     @Test
-    public void shouldDeleteUserWhenAUniqueIdIsMatching() throws DuplicateUniqueKeyException {
+    public void shouldDeleteUserWhenAUniqueIdIsMatching() throws DuplicateEntityException {
         User user = createAnUser(0);
         service.create(user);
 
         service.delete(user.getUniqueId());
-        Optional<User> result = service.retrieve(user.getUniqueId());
+        Optional<? extends User> result = service.retrieve(user.getUniqueId());
 
         assertFalse(result.isPresent());
     }
 
     @Test
-    public void shouldDeleteUserWhenAUserIdIsMatching() throws DuplicateUniqueKeyException {
+    public void shouldDeleteUserWhenAUserIdIsMatching() throws DuplicateEntityException {
         User user = createAnUser(0);
         service.create(user);
 
         service.delete(user.getName());
-        Optional<User> result = service.retrieve(user.getName());
+        Optional<? extends User> result = service.retrieve(user.getName());
 
         assertFalse(result.isPresent());
     }
@@ -250,7 +249,7 @@ public class UserCrudMockTest {
 
     @After
     public void tearDownService() {
-        Set<User> persistedUsers = service.retrieve();
+        Set<? extends User> persistedUsers = service.retrieve();
 
         LOG.debug("Test persisted {} users: {}", persistedUsers.size(), persistedUsers);
     }

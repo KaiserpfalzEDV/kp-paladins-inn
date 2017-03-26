@@ -21,10 +21,10 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.UUID;
 
-import de.kaiserpfalzedv.paladinsinn.commons.Builder;
-import de.kaiserpfalzedv.paladinsinn.commons.BuilderValidationException;
-import de.kaiserpfalzedv.paladinsinn.commons.tenant.model.Tenant;
-import de.kaiserpfalzedv.paladinsinn.security.model.User;
+import de.kaiserpfalzedv.paladinsinn.commons.api.Builder;
+import de.kaiserpfalzedv.paladinsinn.commons.api.BuilderValidationException;
+import de.kaiserpfalzedv.paladinsinn.commons.api.tenant.model.Tenant;
+import de.kaiserpfalzedv.paladinsinn.security.api.model.User;
 import de.kaiserpfalzedv.paladinsinn.topics.model.Topic;
 
 /**

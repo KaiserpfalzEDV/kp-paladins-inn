@@ -11,11 +11,11 @@
     </parent>
 
     <artifactId>kp-pi-topics</artifactId>
-    <name>KP Paladins Inn - Topics</name>
+    <name>KP PI :: Topics</name>
     <packaging>pom</packaging>
 
     <modules>
         <module>kp-pi-topics-api</module>
-        <module>kp-pi-topics-service</module>
+        <module>kp-pi-topics-impl</module>
     </modules>
 </project>
